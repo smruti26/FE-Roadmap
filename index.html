@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Front End Career Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --white: #ffffff;
+  --off: #f5f3ee;
+  --paper: #faf9f6;
+  --ink: #0e0e0e;
+  --ink2: #2a2a2a;
+  --mid-ink: #555555;
+  --light: #aaaaaa;
+  --rule: #e0ddd8;
+  --c1: #00b37d;
+  --c2: #0091e6;
+  --c3: #7b3ff5;
+  --c4: #d97706;
+  --c5: #e5314a;
+  --c6: #1a1a1a;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: 'Instrument Sans', sans-serif; overflow-x: hidden; }
+
+#prog { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: var(--ink); z-index: 200; transition: width 0.08s linear; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(250,249,246,0.93); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; color: var(--ink); }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links li a { display: block; padding: 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--light); text-decoration: none; transition: color 0.2s; position: relative; }
+.nav-links li a::after { content: ''; position: absolute; bottom: 0; left: 14px; right: 14px; height: 2px; background: var(--ink); transform: scaleX(0); transition: transform 0.2s; transform-origin: left; }
+.nav-links li a:hover, .nav-links li a.active { color: var(--ink); }
+.nav-links li a:hover::after, .nav-links li a.active::after { transform: scaleX(1); }
+
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 120px 48px 80px; gap: 60px; border-bottom: 1px solid var(--rule); position: relative; overflow: hidden; }
+.hero-left { position: relative; z-index: 2; }
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1.5px solid var(--ink); border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-bottom: 36px; opacity: 0; animation: rise 0.6s 0.1s forwards; }
+.hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c1); animation: blink 1.6s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.2} }
+h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 9vw, 130px); line-height: 0.88; letter-spacing: 0.02em; color: var(--ink); opacity: 0; animation: rise 0.7s 0.25s forwards; }
+h1 em { font-style: normal; -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.hero-sub { margin-top: 32px; font-size: 16px; line-height: 1.7; color: var(--mid-ink); max-width: 400px; opacity: 0; animation: rise 0.7s 0.4s forwards; }
+.hero-cta { margin-top: 40px; display: inline-block; padding: 14px 36px; background: var(--ink); color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 2px solid var(--ink); transition: background 0.2s, color 0.2s; opacity: 0; animation: rise 0.7s 0.55s forwards; }
+.hero-cta:hover { background: transparent; color: var(--ink); }
+.hero-right { position: relative; z-index: 2; opacity: 0; animation: rise 0.8s 0.5s forwards; }
+.hero-stats-block { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.hstat { background: var(--paper); padding: 36px 32px; transition: background 0.2s; }
+.hstat:hover { background: var(--off); }
+.hstat-n { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; letter-spacing: 0.02em; }
+.hstat:nth-child(1) .hstat-n { color: var(--c1); }
+.hstat:nth-child(2) .hstat-n { color: var(--c2); }
+.hstat:nth-child(3) .hstat-n { color: var(--c3); }
+.hstat:nth-child(4) .hstat-n { color: var(--c5); }
+.hstat-l { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--light); font-weight: 600; margin-top: 6px; }
+.hero-bg-text { position: absolute; bottom: -30px; right: -20px; font-family: 'Bebas Neue', sans-serif; font-size: 260px; color: transparent; -webkit-text-stroke: 1px var(--rule); line-height: 1; pointer-events: none; user-select: none; z-index: 1; }
+@keyframes rise { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+main { max-width: 1200px; margin: 0 auto; padding: 0 48px 120px; }
+
+.stage { display: grid; grid-template-columns: 220px 1fr; border-bottom: 1px solid var(--rule); opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.stage.vis { opacity: 1; transform: translateY(0); }
+.stage-left { padding: 60px 40px 60px 0; border-right: 1px solid var(--rule); position: sticky; top: 80px; align-self: start; }
+.stage-yrs { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--light); margin-bottom: 12px; }
+.stage-num { font-family: 'Bebas Neue', sans-serif; font-size: 80px; line-height: 0.9; letter-spacing: 0.02em; margin-bottom: 16px; }
+.stage-badge { display: inline-block; padding: 5px 12px; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px; color: var(--white); margin-bottom: 20px; }
+.stage-name { font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: 0.04em; line-height: 1.05; color: var(--ink); margin-bottom: 12px; }
+.stage-focus-txt { font-size: 13px; line-height: 1.65; color: var(--mid-ink); }
+.stage-right { padding: 60px 0 60px 56px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+.chip { padding: 7px 14px; font-size: 12px; font-family: 'JetBrains Mono', monospace; border-radius: 2px; border: 1.5px solid; cursor: default; transition: transform 0.18s, box-shadow 0.18s; background: var(--white); }
+.chip:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+.stage[data-l="1"] .stage-num{color:#e0f5ee} .stage[data-l="1"] .stage-badge{background:var(--c1)} .stage[data-l="1"] .chip{color:var(--c1);border-color:rgba(0,179,125,0.25)} .stage[data-l="1"] .stage-name{color:var(--c1)} .stage[data-l="1"] .insight{border-left-color:var(--c1)} .stage[data-l="1"] .insight-ico{background:rgba(0,179,125,0.1);color:var(--c1)}
+.stage[data-l="2"] .stage-num{color:#deeefa} .stage[data-l="2"] .stage-badge{background:var(--c2)} .stage[data-l="2"] .chip{color:var(--c2);border-color:rgba(0,145,230,0.25)} .stage[data-l="2"] .stage-name{color:var(--c2)} .stage[data-l="2"] .insight{border-left-color:var(--c2)} .stage[data-l="2"] .insight-ico{background:rgba(0,145,230,0.1);color:var(--c2)}
+.stage[data-l="3"] .stage-num{color:#ede6ff} .stage[data-l="3"] .stage-badge{background:var(--c3)} .stage[data-l="3"] .chip{color:var(--c3);border-color:rgba(123,63,245,0.25)} .stage[data-l="3"] .stage-name{color:var(--c3)} .stage[data-l="3"] .insight{border-left-color:var(--c3)} .stage[data-l="3"] .insight-ico{background:rgba(123,63,245,0.1);color:var(--c3)}
+.stage[data-l="4"] .stage-num{color:#fdefd6} .stage[data-l="4"] .stage-badge{background:var(--c4)} .stage[data-l="4"] .chip{color:var(--c4);border-color:rgba(217,119,6,0.25)} .stage[data-l="4"] .stage-name{color:var(--c4)} .stage[data-l="4"] .insight{border-left-color:var(--c4)} .stage[data-l="4"] .insight-ico{background:rgba(217,119,6,0.1);color:var(--c4)}
+.stage[data-l="5"] .stage-num{color:#fce6ea} .stage[data-l="5"] .stage-badge{background:var(--c5)} .stage[data-l="5"] .chip{color:var(--c5);border-color:rgba(229,49,74,0.25)} .stage[data-l="5"] .stage-name{color:var(--c5)} .stage[data-l="5"] .insight{border-left-color:var(--c5)} .stage[data-l="5"] .insight-ico{background:rgba(229,49,74,0.1);color:var(--c5)}
+.stage[data-l="6"] .stage-num{color:#e8e8e8} .stage[data-l="6"] .stage-badge{background:var(--c6)} .stage[data-l="6"] .chip{color:var(--c6);border-color:rgba(26,26,26,0.18)} .stage[data-l="6"] .stage-name{color:var(--c6)} .stage[data-l="6"] .insight{border-left-color:var(--c6)} .stage[data-l="6"] .insight-ico{background:rgba(26,26,26,0.05);color:var(--c6)}
+
+.insight { border-left: 3px solid; padding: 18px 20px; background: var(--off); border-radius: 0 4px 4px 0; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+.insight-ico { width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.insight-txt { font-size: 13.5px; line-height: 1.7; color: var(--mid-ink); }
+.insight-txt strong { color: var(--ink); font-weight: 600; }
+
+.section-block { padding: 80px 0; border-bottom: 1px solid var(--rule); opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+.section-block.vis { opacity: 1; transform: translateY(0); }
+.sec-head { display: flex; align-items: baseline; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+.sec-title { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.04em; color: var(--ink); }
+.sec-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--light); }
+
+.salary-row { display: grid; grid-template-columns: repeat(6,1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.sal-cell { background: var(--paper); padding: 28px 24px; transition: background 0.2s; cursor: default; }
+.sal-cell:hover { background: var(--white); }
+.sal-lv { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); margin-bottom: 10px; }
+.sal-n { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.03em; line-height: 1; margin-bottom: 4px; }
+.sal-cell:nth-child(1) .sal-n{color:var(--c1)} .sal-cell:nth-child(2) .sal-n{color:var(--c2)} .sal-cell:nth-child(3) .sal-n{color:var(--c3)} .sal-cell:nth-child(4) .sal-n{color:var(--c4)} .sal-cell:nth-child(5) .sal-n{color:var(--c5)} .sal-cell:nth-child(6) .sal-n{color:var(--c6)}
+.sal-sub { font-size: 10px; color: var(--light); }
+
+.soft-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.soft-cell { background: var(--paper); padding: 32px 28px; transition: background 0.2s; }
+.soft-cell:hover { background: var(--white); }
+.soft-ico { font-size: 24px; margin-bottom: 14px; display: block; }
+.soft-t { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em; color: var(--ink); margin-bottom: 10px; }
+.soft-d { font-size: 13px; line-height: 1.7; color: var(--mid-ink); }
+
+.scroll-ind { position: fixed; right: 32px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 150; }
+.sind { width: 5px; height: 5px; border-radius: 50%; background: var(--rule); border: 1.5px solid var(--rule); transition: background 0.3s, border-color 0.3s, transform 0.3s; cursor: pointer; }
+.sind.on { transform: scale(1.6); border-color: var(--ink); background: var(--ink); }
+
+footer { padding: 60px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--rule); flex-wrap: wrap; gap: 20px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.06em; color: var(--ink); }
+.footer-copy { font-size: 12px; color: var(--light); line-height: 1.6; text-align: right; }
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:100px 24px 60px}
+  .hero-bg-text{display:none}
+  .stage{grid-template-columns:1fr}
+  .stage-left{position:static;border-right:none;border-bottom:1px solid var(--rule);padding:40px 0 24px}
+  .stage-right{padding:32px 0 40px}
+  nav{padding:16px 24px}
+  .nav-links{display:none}
+  main{padding:0 24px 80px}
+  .salary-row{grid-template-columns:repeat(3,1fr)}
+  .soft-grid{grid-template-columns:repeat(2,1fr)}
+  .scroll-ind{display:none}
+  footer{padding:40px 24px}
+  .footer-copy{text-align:left}
+}
+@media(max-width:560px){
+  .salary-row{grid-template-columns:repeat(2,1fr)}
+  .soft-grid{grid-template-columns:1fr}
+  h1{font-size:64px}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav>
+  <div class="nav-logo">FE Roadmap</div>
+  <ul class="nav-links">
+    <li><a href="#s1">Junior</a></li>
+    <li><a href="#s2">Mid</a></li>
+    <li><a href="#s3">Senior</a></li>
+    <li><a href="#s4">Staff</a></li>
+    <li><a href="#s5">Principal</a></li>
+    <li><a href="#s6">VP</a></li>
+    <li><a href="#salary">Salary</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><span class="hero-tag-dot"></span> Front End Engineering · 2025</div>
+    <h1>CAREER<br><em>PATH</em><br>ROADMAP</h1>
+    <p class="hero-sub">A complete 15-year map of the front end engineering career — from shipping your first component to shaping entire organisations.</p>
+    <a href="#s1" class="hero-cta">Explore the Path</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stats-block">
+      <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Career Levels</div></div>
+      <div class="hstat"><div class="hstat-n">15+</div><div class="hstat-l">Years Mapped</div></div>
+      <div class="hstat"><div class="hstat-n">60+</div><div class="hstat-l">Core Skills</div></div>
+      <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Key Mindsets</div></div>
+    </div>
+  </div>
+  <div class="hero-bg-text">FE</div>
+</section>
+
+<main>
+
+  <div class="stage" data-l="1" id="s1">
+    <div class="stage-left">
+      <div class="stage-yrs">// 0 – 2 years</div>
+      <div class="stage-num">01</div>
+      <div class="stage-badge">Junior Developer</div>
+      <div class="stage-name">Learning<br>the Craft</div>
+      <p class="stage-focus-txt">Shipping with guidance. Building intuition. Learning to read a codebase, not just write one.</p>
+    </div>
+    <div class="stage-right">
+      <div class="chips">
+        <div class="chip">HTML &amp; CSS</div><div class="chip">JavaScript ES6+</div><div class="chip">React Basics</div>
+        <div class="chip">Git &amp; GitHub</div><div class="chip">Browser DevTools</div><div class="chip">Responsive Design</div>
+        <div class="chip">REST APIs</div><div class="chip">npm / Bundlers</div><div class="chip">CSS Flexbox &amp; Grid</div>
+        <div class="chip">Component Thinking</div><div class="chip">Semantic HTML</div><div class="chip">Debugging Basics</div>
+      </div>
+      <div class="insight">
+        <div class="insight-ico">💡</div>
+        <div class="insight-txt"><strong>Mindset shift:</strong> Speed doesn't matter yet — understanding does. Ask "why" after every code review. Your most important skill is learning how to learn: reading docs, debugging systematically, and shipping incrementally under guidance.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage" data-l="2" id="s2">
+    <div class="stage-left">
+      <div class="stage-yrs">// 2 – 4 years</div>
+      <div class="stage-num">02</div>
+      <div class="stage-badge">Mid-Level Developer</div>
+      <div class="stage-name">Owning<br>Outcomes</div>
+      <p class="stage-focus-txt">Independence, quality, and beginning to mentor. You ship features end-to-end without hand-holding.</p>
+    </div>
+    <div class="stage-right">
+      <div class="chips">
+        <div class="chip">TypeScript</div><div class="chip">State Management</div><div class="chip">Testing (Jest/RTL)</div>
+        <div class="chip">Performance Opt.</div><div class="chip">Code Reviews</div><div class="chip">Accessibility WCAG</div>
+        <div class="chip">CI / CD Basics</div><div class="chip">Design Systems</div><div class="chip">GraphQL / tRPC</div>
+        <div class="chip">Web Vitals</div><div class="chip">Error Handling</div><div class="chip">Module Architecture</div>
+      </div>
+      <div class="insight">
+        <div class="insight-ico">⚡</div>
+        <div class="insight-txt"><strong>Mindset shift:</strong> Stop asking if it works — ask if it's <em>maintainable</em>. You're now responsible for the quality bar of your team. Learn to give feedback that improves code without discouraging people. Reliability is your currency.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage" data-l="3" id="s3">
+    <div class="stage-left">
+      <div class="stage-yrs">// 4 – 7 years</div>
+      <div class="stage-num">03</div>
+      <div class="stage-badge">Senior Developer</div>
+      <div class="stage-name">Raising<br>the Ceiling</div>
+      <p class="stage-focus-txt">Judgment, architecture, and technical leadership. Your impact is measured in team velocity, not personal output.</p>
+    </div>
+    <div class="stage-right">
+      <div class="chips">
+        <div class="chip">System Architecture</div><div class="chip">Adv. Performance</div><div class="chip">Tech Leadership</div>
+        <div class="chip">Cross-team Collab</div><div class="chip">Eng. Standards</div><div class="chip">Mentorship</div>
+        <div class="chip">Incident Response</div><div class="chip">Tech Debt Strategy</div><div class="chip">Micro-frontends</div>
+        <div class="chip">Security Principles</div><div class="chip">RFC Writing</div><div class="chip">Stakeholder Comms</div>
+      </div>
+      <div class="insight">
+        <div class="insight-ico">🔭</div>
+        <div class="insight-txt"><strong>Mindset shift:</strong> The best senior engineers aren't the best coders — they make the <em>right</em> decisions under ambiguity. "It depends" said with conviction and tradeoff analysis is more valuable than a confident wrong answer.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage" data-l="4" id="s4">
+    <div class="stage-left">
+      <div class="stage-yrs">// 7 – 10 years</div>
+      <div class="stage-num">04</div>
+      <div class="stage-badge">Staff Engineer</div>
+      <div class="stage-name">Shaping<br>the Org</div>
+      <p class="stage-focus-txt">Organisational impact and technical strategy. You're connective tissue across many teams, not within one.</p>
+    </div>
+    <div class="stage-right">
+      <div class="chips">
+        <div class="chip">Technical Strategy</div><div class="chip">Org-wide Roadmap</div><div class="chip">Hiring &amp; Culture</div>
+        <div class="chip">Exec. Comms</div><div class="chip">Platform Architecture</div><div class="chip">Industry Standards</div>
+        <div class="chip">Developer Exp.</div><div class="chip">Innovation Programs</div><div class="chip">Build vs Buy</div>
+        <div class="chip">FinDev / Cost Aware</div><div class="chip">OKR Alignment</div><div class="chip">Vendor Evaluation</div>
+      </div>
+      <div class="insight">
+        <div class="insight-ico">🏗️</div>
+        <div class="insight-txt"><strong>Mindset shift:</strong> You solve problems that don't have tickets yet. Staff engineers spot structural misalignments and slow-burning tech debt crises. Influence without authority is your primary operating mode.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage" data-l="5" id="s5">
+    <div class="stage-left">
+      <div class="stage-yrs">// 10 – 13 years</div>
+      <div class="stage-num">05</div>
+      <div class="stage-badge">Principal Engineer</div>
+      <div class="stage-name">Defining<br>the Field</div>
+      <p class="stage-focus-txt">Industry-level impact. You define how the entire discipline evolves — inside your company and beyond.</p>
+    </div>
+    <div class="stage-right">
+      <div class="chips">
+        <div class="chip">Multi-org Strategy</div><div class="chip">OSS Leadership</div><div class="chip">Conference Speaking</div>
+        <div class="chip">Deep Domain Mastery</div><div class="chip">Hiring Bar Setting</div><div class="chip">Culture Architecture</div>
+        <div class="chip">Emerging Tech Eval.</div><div class="chip">Patent / Research</div><div class="chip">External Relations</div>
+        <div class="chip">Developer Advocacy</div><div class="chip">Engineering Brand</div><div class="chip">Long-horizon Bets</div>
+      </div>
+      <div class="insight">
+        <div class="insight-ico">🌐</div>
+        <div class="insight-txt"><strong>Mindset shift:</strong> Your credibility is now external. Writing publicly, contributing to open source, and speaking at conferences is part of the job. You're a beacon that attracts talent and shapes your org's engineering reputation.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage" data-l="6" id="s6">
+    <div class="stage-left">
+      <div class="stage-yrs">// 13 – 15+ years</div>
+      <div class="stage-num">06</div>
+      <div class="stage-badge">VP / Distinguished Eng.</div>
+      <div class="stage-name">The Long<br>Game</div>
+      <p class="stage-focus-txt">Business and engineering fusion. You bridge what's technically possible with what creates lasting business value.</p>
+    </div>
+    <div class="stage-right">
+      <div class="chips">
+        <div class="chip">Board-level Comms</div><div class="chip">M&amp;A Due Diligence</div><div class="chip">Eng. Org Design</div>
+        <div class="chip">P&amp;L Awareness</div><div class="chip">CTO Collaboration</div><div class="chip">Succession Planning</div>
+        <div class="chip">Technology Vision</div><div class="chip">Strategic Partnerships</div><div class="chip">Risk Management</div>
+        <div class="chip">Thought Leadership</div><div class="chip">Talent Pipeline</div><div class="chip">Market Positioning</div>
+      </div>
+      <div class="insight">
+        <div class="insight-ico">♟️</div>
+        <div class="insight-txt"><strong>Mindset shift:</strong> You think in decades, not quarters. Every technology bet outlives three product cycles. The question is never "can we build it?" — it's "should we, and are we the ones to do it?" Legacy is the metric now.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block" id="salary">
+    <div class="sec-head">
+      <div class="sec-title">COMPENSATION</div>
+      <div class="sec-tag">// US market benchmarks · 2025 · TC incl. equity</div>
+    </div>
+    <div class="salary-row">
+      <div class="sal-cell"><div class="sal-lv">Junior</div><div class="sal-n">$70–110k</div><div class="sal-sub">0–2 years</div></div>
+      <div class="sal-cell"><div class="sal-lv">Mid-Level</div><div class="sal-n">$110–160k</div><div class="sal-sub">2–4 years</div></div>
+      <div class="sal-cell"><div class="sal-lv">Senior</div><div class="sal-n">$160–220k</div><div class="sal-sub">4–7 years</div></div>
+      <div class="sal-cell"><div class="sal-lv">Staff</div><div class="sal-n">$210–290k</div><div class="sal-sub">7–10 years</div></div>
+      <div class="sal-cell"><div class="sal-lv">Principal</div><div class="sal-n">$280–380k</div><div class="sal-sub">10–13 years</div></div>
+      <div class="sal-cell"><div class="sal-lv">VP / Dist.</div><div class="sal-n">$350k+</div><div class="sal-sub">13–15+ years</div></div>
+    </div>
+  </div>
+
+  <div class="section-block" id="soft">
+    <div class="sec-head">
+      <div class="sec-title">THE INVISIBLE SKILLS</div>
+      <div class="sec-tag">// Click any card for a step-by-step guide</div>
+    </div>
+    <div class="soft-grid">
+      <div class="soft-cell" data-skill="communication" tabindex="0" role="button" aria-label="Open Communication guide">
+        <div class="soft-cell-inner">
+          <span class="soft-ico">🗣️</span>
+          <div class="soft-t">COMMUNICATION</div>
+          <div class="soft-d">Writing clear PRs, design docs, and RFCs. Distilling complexity into plain language for non-engineers.</div>
+          <div class="soft-open">View guide →</div>
+        </div>
+      </div>
+      <div class="soft-cell" data-skill="systems" tabindex="0" role="button" aria-label="Open Systems Thinking guide">
+        <div class="soft-cell-inner">
+          <span class="soft-ico">🧠</span>
+          <div class="soft-t">SYSTEMS THINKING</div>
+          <div class="soft-d">Seeing second-order effects. Thinking about failure modes before they happen.</div>
+          <div class="soft-open">View guide →</div>
+        </div>
+      </div>
+      <div class="soft-cell" data-skill="influence" tabindex="0" role="button" aria-label="Open Influence guide">
+        <div class="soft-cell-inner">
+          <span class="soft-ico">🤝</span>
+          <div class="soft-t">INFLUENCE</div>
+          <div class="soft-d">Getting cross-functional alignment without a reporting chain. Building trust without authority.</div>
+          <div class="soft-open">View guide →</div>
+        </div>
+      </div>
+      <div class="soft-cell" data-skill="adaptability" tabindex="0" role="button" aria-label="Open Adaptability guide">
+        <div class="soft-cell-inner">
+          <span class="soft-ico">🔄</span>
+          <div class="soft-t">ADAPTABILITY</div>
+          <div class="soft-d">JS frameworks change every 3 years. Engineers who survive 15 years see past the syntax.</div>
+          <div class="soft-open">View guide →</div>
+        </div>
+      </div>
+      <div class="soft-cell" data-skill="learning" tabindex="0" role="button" aria-label="Open Depth of Learning guide">
+        <div class="soft-cell-inner">
+          <span class="soft-ico">📚</span>
+          <div class="soft-t">DEPTH OF LEARNING</div>
+          <div class="soft-d">Deliberately studying fundamentals: CS, algorithms, browser internals, distributed systems.</div>
+          <div class="soft-open">View guide →</div>
+        </div>
+      </div>
+      <div class="soft-cell" data-skill="decisions" tabindex="0" role="button" aria-label="Open Decision Quality guide">
+        <div class="soft-cell-inner">
+          <span class="soft-ico">⚖️</span>
+          <div class="soft-t">DECISION QUALITY</div>
+          <div class="soft-d">Making and documenting good decisions under uncertainty. The rarest skill of all.</div>
+          <div class="soft-open">View guide →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- MODAL OVERLAY -->
+<div id="modalOverlay" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
+  <div id="modalBox">
+    <button id="modalClose" aria-label="Close modal">✕</button>
+    <div id="modalHeader">
+      <div id="modalIco"></div>
+      <div>
+        <div id="modalLabel"></div>
+        <div id="modalTitle"></div>
+      </div>
+    </div>
+    <div id="modalWhy"></div>
+    <div id="stepNav">
+      <button id="stepPrev" aria-label="Previous step">← Prev</button>
+      <span id="stepCount"></span>
+      <button id="stepNext" aria-label="Next step">Next →</button>
+    </div>
+    <div id="stepArea"></div>
+    <div id="modalResources"></div>
+  </div>
+</div>
+
+<style>
+.soft-cell { cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; }
+.soft-cell:hover { background: var(--white); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.soft-cell:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+.soft-open { margin-top: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light); transition: color 0.2s; }
+.soft-cell:hover .soft-open { color: var(--ink); }
+
+#modalOverlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(14,14,14,0.55);
+  z-index: 900;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+#modalOverlay.open { display: flex; animation: fadeIn 0.22s ease; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+#modalBox {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 48px;
+  animation: slideUp 0.25s ease;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+#modalClose {
+  position: absolute; top: 20px; right: 20px;
+  background: var(--off); border: none; cursor: pointer;
+  width: 32px; height: 32px; border-radius: 50%;
+  font-size: 14px; color: var(--mid-ink);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+#modalClose:hover { background: var(--rule); color: var(--ink); }
+
+#modalHeader {
+  display: flex; align-items: center; gap: 20px;
+  margin-bottom: 24px; padding-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+#modalIco { font-size: 36px; line-height: 1; flex-shrink: 0; }
+#modalLabel { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--light); margin-bottom: 4px; }
+#modalTitle { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 0.04em; color: var(--ink); line-height: 1; }
+
+#modalWhy {
+  font-size: 14px; line-height: 1.75; color: var(--mid-ink);
+  margin-bottom: 32px; padding: 16px 20px;
+  background: var(--off); border-left: 3px solid var(--ink);
+  border-radius: 0 4px 4px 0;
+}
+#modalWhy strong { color: var(--ink); font-weight: 600; }
+
+#stepNav {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 24px;
+}
+#stepNav button {
+  padding: 8px 18px; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  background: var(--paper); border: 1px solid var(--rule);
+  cursor: pointer; color: var(--ink); transition: background 0.15s;
+}
+#stepNav button:hover:not(:disabled) { background: var(--off); }
+#stepNav button:disabled { color: var(--light); cursor: default; }
+#stepPrev { border-radius: 2px 0 0 2px; }
+#stepNext { border-radius: 0 2px 2px 0; }
+#stepCount {
+  flex: 1; text-align: center; font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--light); letter-spacing: 0.1em;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 8px 0;
+}
+
+#stepArea { animation: stepFade 0.2s ease; }
+@keyframes stepFade { from{opacity:0;transform:translateX(10px)} to{opacity:1;transform:translateX(0)} }
+
+.step-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 56px;
+  color: var(--rule); line-height: 1; margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+.step-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 24px;
+  color: var(--ink); letter-spacing: 0.04em; margin-bottom: 12px;
+}
+.step-body { font-size: 14px; line-height: 1.8; color: var(--mid-ink); margin-bottom: 20px; }
+.step-body strong { color: var(--ink); font-weight: 600; }
+
+.step-tips { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.step-tip {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px 16px; background: var(--off); border-radius: 2px;
+  font-size: 13px; line-height: 1.6; color: var(--mid-ink);
+}
+.tip-bullet {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--ink); color: var(--white);
+  font-size: 10px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+.step-progress {
+  display: flex; gap: 6px; margin-top: 28px; margin-bottom: 0;
+}
+.step-pip {
+  height: 3px; border-radius: 2px;
+  background: var(--rule); transition: background 0.25s, flex 0.25s;
+  flex: 1;
+}
+.step-pip.done { background: var(--ink); }
+
+#modalResources {
+  margin-top: 32px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.res-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--light);
+  margin-bottom: 14px;
+}
+.res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.res-card {
+  padding: 14px 16px; background: var(--paper);
+  border: 1px solid var(--rule); border-radius: 2px;
+  font-size: 13px; line-height: 1.5;
+  transition: background 0.15s, border-color 0.15s;
+}
+.res-card:hover { background: var(--off); border-color: var(--light); }
+.res-type { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); margin-bottom: 4px; }
+.res-name { font-weight: 600; color: var(--ink); }
+
+@media(max-width:600px) {
+  #modalBox { padding: 28px 20px; }
+  #modalTitle { font-size: 28px; }
+}
+</style>
+
+<div class="scroll-ind" id="scDots"></div>
+
+<footer>
+  <div class="footer-logo">FE CAREER ROADMAP</div>
+  <div class="footer-copy">Front End Engineering · 6 Levels · 15+ Years<br>Compensation data approximate, US market, TC including equity.</div>
+</footer>
+
+<script>
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  prog.style.width = (p * 100) + '%';
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.stage, .section-block').forEach(el => obs.observe(el));
+
+document.querySelectorAll('.chips').forEach(chips => {
+  const els = [...chips.querySelectorAll('.chip')];
+  els.forEach((c,i) => {
+    c.style.opacity = '0'; c.style.transform = 'translateY(8px)';
+    c.style.transition = `opacity 0.35s ${i*0.04}s ease, transform 0.35s ${i*0.04}s ease`;
+  });
+  const co = new IntersectionObserver(entries => {
+    if(entries[0].isIntersecting) { els.forEach(c => { c.style.opacity='1'; c.style.transform='translateY(0)'; }); co.disconnect(); }
+  }, {threshold:0.15});
+  co.observe(chips);
+});
+
+const anchors = ['s1','s2','s3','s4','s5','s6','salary','soft'];
+const scDots = document.getElementById('scDots');
+anchors.forEach(id => {
+  const d = document.createElement('div');
+  d.className = 'sind';
+  d.addEventListener('click', () => document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}));
+  scDots.appendChild(d);
+});
+const dotEls = scDots.querySelectorAll('.sind');
+const sEls = anchors.map(id => document.getElementById(id));
+
+function updateUI() {
+  const mid = window.scrollY + window.innerHeight * 0.4;
+  let active = 0;
+  sEls.forEach((el,i) => { if(el && el.offsetTop <= mid) active = i; });
+  dotEls.forEach((d,i) => d.classList.toggle('on', i === active));
+  document.querySelectorAll('.nav-links a').forEach((a,i) => a.classList.toggle('active', i === active));
+}
+window.addEventListener('scroll', updateUI);
+updateUI();
+
+/* ===== MODAL DATA ===== */
+const SKILLS = {
+  communication: {
+    ico: '🗣️', label: 'Invisible Skill 01',
+    title: 'COMMUNICATION',
+    why: '<strong>Why it determines your ceiling:</strong> At Junior level, code speaks for you. At Senior and above, communication IS your primary output. The engineers who plateau are almost always those who write unclear documents, go quiet in meetings, or can\'t translate technical constraints for product. Every level of career growth compounds the requirement.',
+    steps: [
+      {
+        title: 'MASTER THE PULL REQUEST',
+        body: 'A PR is not just code — it\'s a written argument for why this change is correct. Junior engineers describe <em>what</em> they changed. Senior engineers explain <em>why</em>. The PR description should answer: what problem does this solve, what approach did you choose and why, what did you rule out, and what should reviewers focus on.',
+        tips: ['Write the PR description before writing the code — it forces clarity of intent.', 'Include before/after screenshots for any UI changes, no exceptions.', 'Link to the ticket, spec, or conversation that spawned this change.', 'Flag specific areas of uncertainty: "I\'m not sure about the error handling in line 42."']
+      },
+      {
+        title: 'WRITE DOCUMENTS THAT GET READ',
+        body: 'Design docs, RFCs, and postmortems only work if people read them. Most engineers write for themselves — they document what they know rather than what the reader needs. Good technical writing starts with the conclusion, not the journey.',
+        tips: ['Lead with a one-paragraph TL;DR — if they read nothing else, they understand the decision.', 'Use headers as standalone sentences: "We chose Postgres over MySQL because of JSON support."', 'Put your recommendation clearly before the tradeoffs, not buried after them.', 'Draft in plain language first, then add precision — not the reverse.']
+      },
+      {
+        title: 'SPEAK UP IN MEETINGS',
+        body: 'Many engineers confuse silence with professionalism. It isn\'t. If you have a concern, a question, or a different angle, not raising it is a form of withholding. Meetings are where decisions get made — being present but silent means you\'re absent from the decisions.',
+        tips: ['Prepare one question or observation before every significant meeting.', 'If you\'re uncertain, say so explicitly: "I\'m not sure, but my instinct is…"', 'Disagree with the idea, never the person. "I see it differently" lands better than "I disagree."', 'Send a brief Slack follow-up after a meeting if something was missed or you changed your view.']
+      },
+      {
+        title: 'TRANSLATE FOR NON-ENGINEERS',
+        body: 'The ability to explain technical constraints to PMs, designers, and executives is what separates Senior from Staff. This is not about dumbing things down — it\'s about finding the right frame. A PM doesn\'t need to know about race conditions; they need to know why the feature needs an extra sprint.',
+        tips: ['Replace jargon with consequences: "technical debt" → "this will slow every future feature in this area by 30%."', 'Use analogies from the listener\'s domain, not yours.', 'Always answer "so what does this mean for the launch?" before being asked.', 'Practice the 30-second version of any technical update — if you can\'t, you don\'t fully understand it yet.']
+      },
+      {
+        title: 'BUILD A WRITING HABIT',
+        body: 'Communication is a muscle. Engineers who write regularly — whether internal docs, a blog, or even detailed Slack messages — consistently outperform those who don\'t. Writing forces structured thinking. It also builds your reputation as someone who thinks clearly.',
+        tips: ['Write a weekly summary of your work for your team — short, 5 bullets max.', 'Take notes in every 1:1 and meeting and share them back.', 'Start a personal technical blog, even if only your team reads it.', 'Re-read your Slack messages before sending longer ones — would a stranger understand it?']
+      }
+    ],
+    resources: [
+      { type: 'Book', name: 'Writing for Engineers — Dorian Taylor' },
+      { type: 'Book', name: 'Docs for Developers — Bhatti et al.' },
+      { type: 'Practice', name: 'Write one internal doc per week' },
+      { type: 'Tool', name: 'Notion / Confluence for async docs' },
+      { type: 'Community', name: 'Write the Docs community' },
+      { type: 'Course', name: 'Technical Writing — Google (free)' }
+    ]
+  },
+
+  systems: {
+    ico: '🧠', label: 'Invisible Skill 02',
+    title: 'SYSTEMS THINKING',
+    why: '<strong>Why it determines your ceiling:</strong> Junior engineers fix bugs. Mid-level engineers build features. Senior engineers ask "what happens to the rest of the system when this changes?" Systems thinking is the cognitive leap that separates reactive engineers from architects. Without it, you will plateau at mid-level forever.',
+    steps: [
+      {
+        title: 'SEE THE WHOLE SYSTEM',
+        body: 'Before touching any code, sketch the system it belongs to. What does it receive? What does it produce? Who depends on its output? What happens when it\'s slow, unavailable, or returns unexpected data? Most engineers only visualise the happy path — systems thinkers visualise every path.',
+        tips: ['Draw a dependency diagram before starting any significant feature.', 'Ask: "who calls this, and what do they do when it fails?" for every API you build.', 'Identify what assumptions your code makes about its environment — list them explicitly.', 'Use sequence diagrams for any feature that involves more than two services.']
+      },
+      {
+        title: 'REASON ABOUT FAILURE MODES',
+        body: 'Every system will fail. The question is whether you designed for it or were surprised by it. The best engineers spend as much time on failure paths as on the happy path. This is not pessimism — it is engineering.',
+        tips: ['For every new feature, write a failure mode document: what fails, how, and what happens downstream.', 'Ask "what\'s the worst that could happen?" and take it seriously, not rhetorically.', 'Introduce chaos deliberately in staging: kill services, slow responses, send malformed data.', 'Practice pre-mortems: assume the project failed — now explain why.']
+      },
+      {
+        title: 'THINK IN FEEDBACK LOOPS',
+        body: 'Systems are not linear — outputs loop back as inputs. A slow database makes requests queue, which slows the database further. Understanding feedback loops helps you spot where small problems become catastrophic ones, and where to intervene early.',
+        tips: ['Identify at least one positive and one negative feedback loop in every system you work on.', 'Watch for "retry storms" — when retries amplify load under failure.', 'Monitor leading indicators, not just lagging ones. Don\'t wait for errors; watch for latency increases.', 'Map how your metrics influence each other — causality chains, not just correlations.']
+      },
+      {
+        title: 'STUDY ADJACENT SYSTEMS',
+        body: 'Your code does not exist in isolation. The database, the CDN, the message queue, the third-party API — they all have their own behaviours, failure modes, and constraints. The more you understand adjacent systems, the better your decisions about your own code.',
+        tips: ['Read the documentation for every service your code touches — not just your team\'s docs.', 'Understand at least one layer below your abstraction: if you use React, understand the DOM.', 'Shadow your on-call engineers to see which systems cause incidents and why.', 'Read incident postmortems from other companies — PagerDuty, Cloudflare, and GitHub publish them.']
+      },
+      {
+        title: 'MODEL BEFORE YOU BUILD',
+        body: 'Systems thinking is most powerful before code is written. A half-hour of modelling can prevent weeks of rework. Get into the habit of designing on paper, in diagrams, or in pseudocode before opening your editor.',
+        tips: ['Always prototype the data model first — it constrains everything else.', 'Use event-storming with your team on complex domains to surface hidden coupling.', 'Time-box modelling sessions: 30 minutes of whiteboarding, then commit to a direction.', 'Version your architecture diagrams just like your code.']
+      }
+    ],
+    resources: [
+      { type: 'Book', name: 'Thinking in Systems — Donella Meadows' },
+      { type: 'Book', name: 'Designing Data-Intensive Applications — Kleppmann' },
+      { type: 'Course', name: 'System Design Primer (GitHub)' },
+      { type: 'Practice', name: 'Draw architecture diagrams weekly' },
+      { type: 'Reading', name: 'Incident postmortems — PagerDuty Blog' },
+      { type: 'Tool', name: 'Excalidraw / Miro for diagramming' }
+    ]
+  },
+
+  influence: {
+    ico: '🤝', label: 'Invisible Skill 03',
+    title: 'INFLUENCE',
+    why: '<strong>Why it determines your ceiling:</strong> At Staff and above, you have no direct authority over most people you need to move. Your ideas only become reality if you can get others to act on them voluntarily. Engineers who rely on hierarchy to get things done top out at Senior. Influence is the Staff engineer\'s primary tool.',
+    steps: [
+      {
+        title: 'BUILD TRUST BEFORE YOU NEED IT',
+        body: 'Influence is not something you earn in the moment — it\'s something you accumulate over time. Every interaction is either depositing into or withdrawing from a trust bank with each colleague. Engineers who try to influence others without having built trust first will be ignored, resisted, or overruled.',
+        tips: ['Follow through on every commitment, no matter how small.', 'Give credit publicly and take blame privately.', 'Be the person who makes others\' problems easier, not harder.', 'Show interest in your colleagues\' work outside your own lane.']
+      },
+      {
+        title: 'UNDERSTAND WHAT OTHERS CARE ABOUT',
+        body: 'Influence requires understanding the other person\'s goals, pressures, and constraints. A PM cares about shipping date and user impact. A designer cares about experience coherence. A manager cares about team health and predictability. Speak to what they care about — not to what you care about.',
+        tips: ['Before any alignment conversation, write down the other person\'s goals and constraints first.', 'Ask "what does success look like for you?" before proposing anything.', 'Find the shared goal underneath the disagreement — there almost always is one.', 'Learn the business context: revenue impact, user numbers, strategic priorities.']
+      },
+      {
+        title: 'USE DATA AND STORIES TOGETHER',
+        body: 'Data alone doesn\'t persuade — people rationalise, not reason, their way to decisions. Stories alone don\'t persuade either — they seem anecdotal. The most effective engineers combine concrete data with a compelling narrative that makes the data meaningful.',
+        tips: ['Lead with the "so what" of the data, not the data itself.', 'Find one vivid user story or real incident that makes the abstract concrete.', 'Pre-empt the strongest counterargument in your proposal before someone else raises it.', 'Use visuals: a one-page diagram outperforms a five-page doc for alignment.']
+      },
+      {
+        title: 'DISAGREE AND COMMIT',
+        body: 'Influence includes knowing when to stop pushing. Teams need momentum, and endlessly relitigating decisions destroys trust and velocity. The most respected engineers voice their disagreement clearly, once, and then commit fully to the chosen direction.',
+        tips: ['State your disagreement clearly and specifically: "I think this will cause X problem because Y."', 'Once a decision is made, support it publicly — even if you still have reservations privately.', 'Document your concern in writing before the decision — this protects everyone.', 'Revisit when new data arrives, not just when you feel frustrated.']
+      },
+      {
+        title: 'INVEST IN THE INFORMAL NETWORK',
+        body: 'Decisions are rarely made in formal meetings — they\'re shaped in 1:1s, Slack threads, and hallway conversations. Engineers who only show up for official channels miss most of where influence actually happens.',
+        tips: ['Have a 1:1 with one cross-functional colleague per week: PM, designer, data scientist.', 'Volunteer for cross-team projects to build relationships outside your pod.', 'Be generous in Slack: respond to questions outside your domain when you can help.', 'Eat lunch with people you don\'t usually work with.']
+      }
+    ],
+    resources: [
+      { type: 'Book', name: 'Staff Engineer — Will Larson' },
+      { type: 'Book', name: 'Crucial Conversations — Patterson et al.' },
+      { type: 'Book', name: 'Never Split the Difference — Chris Voss' },
+      { type: 'Reading', name: 'staffeng.com — stories & patterns' },
+      { type: 'Practice', name: 'One cross-functional 1:1 per week' },
+      { type: 'Course', name: 'Negotiation — Yale (Coursera, free audit)' }
+    ]
+  },
+
+  adaptability: {
+    ico: '🔄', label: 'Invisible Skill 04',
+    title: 'ADAPTABILITY',
+    why: '<strong>Why it determines your ceiling:</strong> The average lifespan of a dominant frontend framework is 3–5 years. Engineers who\'ve survived 15 years didn\'t do it by mastering every new tool — they did it by developing a transferable mental model of how software works that transcends any specific technology.',
+    steps: [
+      {
+        title: 'INVEST IN FUNDAMENTALS, NOT FRAMEWORKS',
+        body: 'React will be replaced. TypeScript might be superseded. The DOM, the event loop, HTTP, data structures, and algorithms will not. Every hour you invest in fundamentals compounds across your entire career. Every hour you invest in a specific framework has a shelf life.',
+        tips: ['Learn how the browser renders a page end-to-end, not just how React updates the DOM.', 'Understand the event loop deeply — most "JavaScript is weird" problems are event loop problems.', 'Know your data structures: when to use a Map vs an Object, a Set vs an Array.', 'Read the HTTP spec, not just MDN summaries. Understanding caching, headers, and status codes is career-long.']
+      },
+      {
+        title: 'BUILD A PATTERN LIBRARY IN YOUR HEAD',
+        body: 'New frameworks are almost always new syntax for old patterns: component trees, state management, event handling, side effects. When you see a new framework, the question is not "how do I use this?" but "which patterns does this implement, and how?"',
+        tips: ['When learning a new tool, identify which patterns you already know it\'s implementing.', 'Study design patterns: observer, factory, singleton, mediator — they appear in every framework.', 'Compare how React, Vue, and Svelte solve the same problem — the differences reveal the trade-offs.', 'Keep a personal notes file of patterns you\'ve encountered and where you\'ve seen them reappear.']
+      },
+      {
+        title: 'PRACTICE DELIBERATE DISCOMFORT',
+        body: 'Adaptability is a muscle. If you only ever work in comfortable, familiar technology, the muscle atrophies. Engineers who regularly step into unfamiliar ground — a new language, a different paradigm, an unfamiliar domain — stay adaptable throughout their careers.',
+        tips: ['Solve one Advent of Code puzzle per year in a language you don\'t use professionally.', 'Build a side project in a framework you\'ve never used.', 'Pair with backend engineers regularly to understand their constraints.', 'Take on one unfamiliar task per sprint, even if it makes you slower temporarily.']
+      },
+      {
+        title: 'EVALUATE, DON\'T CHASE',
+        body: 'Adaptability does not mean adopting every new thing. It means being able to evaluate new things clearly and adopt them when they\'re genuinely better. The engineer who chases every new framework is just as unadaptable as the one who refuses to leave jQuery.',
+        tips: ['When a new technology emerges, give it 12 months before forming a strong opinion.', 'Evaluate by use case, not popularity: "is this better for my specific problem?"', 'Read the criticism of any technology you\'re considering adopting, not just the marketing.', 'Default to boring, proven technology for production — use new tech in side projects first.']
+      },
+      {
+        title: 'LEARN FROM HISTORY',
+        body: 'Frontend has cyclical patterns. We moved from server rendering to client rendering and back. Components have been invented and reinvented. Understanding the history of frontend development helps you predict where new trends are actually headed.',
+        tips: ['Read "The History of JavaScript" — it explains why things are the way they are.', 'Study what problems killed previous frameworks: AngularJS, Backbone, Ember.', 'When a new architectural pattern is trending, find the 10-year-old blog post that proposed it first.', 'Talk to engineers with 15+ years of experience — their perspective on cycles is invaluable.']
+      }
+    ],
+    resources: [
+      { type: 'Book', name: 'The Pragmatic Programmer — Hunt & Thomas' },
+      { type: 'Reading', name: 'History of JavaScript — auth0.com' },
+      { type: 'Practice', name: 'Annual language/framework exploration project' },
+      { type: 'Course', name: 'CS50 — Harvard (free) for fundamentals' },
+      { type: 'Community', name: 'Hacker News — technology discussions' },
+      { type: 'Book', name: 'A Philosophy of Software Design — John Ousterhout' }
+    ]
+  },
+
+  learning: {
+    ico: '📚', label: 'Invisible Skill 05',
+    title: 'DEPTH OF LEARNING',
+    why: '<strong>Why it determines your ceiling:</strong> Shallow knowledge of many technologies creates an engineer who can only work in familiar contexts. Deep knowledge of a domain creates an engineer who can reason about novel problems. Depth is what allows you to teach, to architect, and to make the right call when the answer isn\'t on Stack Overflow.',
+    steps: [
+      {
+        title: 'FIND YOUR DEPTH DOMAIN',
+        body: 'You cannot go deep on everything — attempting to will make you mediocre at everything. The most effective engineers develop genuine depth in 1–2 areas while maintaining working knowledge of adjacent ones. Your depth domain should be something that genuinely fascinates you, not just something that seems strategic.',
+        tips: ['List the topics where you consistently want to know more, not just enough to get the task done.', 'Notice what you read about in your free time — that\'s usually your genuine depth domain.', 'Discuss your depth area with your manager and look for projects that let you exercise it.', 'Depth compounds: 5 years of deep learning in one area outperforms 5 years of shallow breadth.']
+      },
+      {
+        title: 'READ PRIMARY SOURCES',
+        body: 'Blog posts summarise. Twitter threads distort. Papers, specs, and source code are the primary sources. Engineers who go to primary sources develop a much more accurate and nuanced understanding than those who learn exclusively through secondary sources.',
+        tips: ['Read the RFC or spec behind technologies you use: HTTP/2, CSS Grid, the JS event loop spec.', 'Read the source code of at least one open source library you depend on.', 'Find the original paper or proposal behind influential ideas: React\'s fibre architecture, Redux\'s design.', 'When something confuses you, find the person who built it and read what they wrote about it.']
+      },
+      {
+        title: 'TEACH WHAT YOU LEARN',
+        body: 'You do not understand something until you can teach it. Teaching forces you to identify the gaps in your own understanding, to organise knowledge into a structure others can follow, and to find the right analogies. Every time you teach something, your own understanding deepens.',
+        tips: ['Write a blog post or internal doc about the last complex thing you learned.', 'Give a 15-minute lightning talk to your team on something you\'ve recently studied.', 'When a junior engineer asks a question, resist answering immediately — guide them to the answer.', 'Offer to run a study group on a topic your team needs to learn.']
+      },
+      {
+        title: 'STRUCTURE YOUR LEARNING TIME',
+        body: 'Unstructured learning is inefficient. Randomly reading articles accumulates information but rarely builds understanding. Deliberate learning — with goals, spaced repetition, and active recall — builds durable knowledge that you can actually use under pressure.',
+        tips: ['Dedicate 30 minutes per day to deliberate learning — block it in your calendar.', 'Use spaced repetition: Anki for concepts you want to retain long-term.', 'Set a quarterly learning goal: "understand the V8 engine well enough to explain JIT compilation."', 'Build something with every concept you learn — passive reading rarely sticks.']
+      },
+      {
+        title: 'LEARN THE LAYER BELOW',
+        body: 'Every abstraction sits on top of another. React sits on the DOM. The DOM sits on the browser\'s rendering engine. Understanding the layer below your current abstraction gives you a mental model that lets you reason about performance, bugs, and constraints that your colleagues cannot see.',
+        tips: ['If you use React: understand how browsers construct and update the real DOM.', 'If you write JavaScript: understand how V8 compiles and optimises your code.', 'If you use CSS: understand how browsers calculate specificity, cascade, and layout.', 'If you use HTTP APIs: understand TCP/IP, DNS lookup, and TLS handshake.']
+      }
+    ],
+    resources: [
+      { type: 'Book', name: 'Deep Work — Cal Newport' },
+      { type: 'Tool', name: 'Anki — spaced repetition flashcards' },
+      { type: 'Reading', name: 'V8 dev blog — JavaScript engine internals' },
+      { type: 'Course', name: 'Browser Rendering Optimization — Udacity' },
+      { type: 'Practice', name: 'Monthly deep-dive: one topic, one month' },
+      { type: 'Book', name: 'Make It Stick — Brown, Roediger & McDaniel' }
+    ]
+  },
+
+  decisions: {
+    ico: '⚖️', label: 'Invisible Skill 06',
+    title: 'DECISION QUALITY',
+    why: '<strong>Why it determines your ceiling:</strong> Every day you make dozens of engineering decisions. Most are low-stakes. A few are irreversible and critical. Engineers who develop a rigorous approach to decision-making — especially under uncertainty — make fewer catastrophic mistakes and move faster because they don\'t relitigate settled questions. This is the rarest and most valuable skill in engineering.',
+    steps: [
+      {
+        title: 'SEPARATE REVERSIBLE FROM IRREVERSIBLE',
+        body: 'Jeff Bezos called these Type 1 and Type 2 decisions. Type 2 decisions (reversible) should be made fast with incomplete information. Type 1 decisions (irreversible or very expensive to reverse) deserve much more rigour, time, and data. Most engineers apply the same process to both, which is wrong in both directions.',
+        tips: ['Before making any significant decision, ask: how hard is it to reverse this in 6 months?', 'Move fast on reversible decisions — waiting for more data on them is just procrastination.', 'Slow down on irreversible decisions: database schemas, public APIs, architectural patterns.', 'Explicitly label decisions as Type 1 or Type 2 in your design docs.']
+      },
+      {
+        title: 'WRITE DOWN YOUR REASONING',
+        body: 'Undocumented decisions are the source of most technical debt. When you don\'t record why you chose X over Y, future engineers (including you) will change X back to Y, not knowing why it was X in the first place. Architecture Decision Records (ADRs) are the professional solution.',
+        tips: ['Write an ADR for every significant technical decision: what you decided, why, and what you rejected.', 'Store ADRs in version control alongside the code they affect.', 'Record the date and the people involved — context changes, and future readers need to know.', 'Revisit ADRs when circumstances change. An outdated ADR is better than no ADR — just update it.']
+      },
+      {
+        title: 'REASON UNDER UNCERTAINTY',
+        body: 'Most engineering decisions are made with incomplete information. The skill is not waiting for certainty — it\'s learning to make good decisions without it. This means quantifying uncertainty, identifying what you don\'t know, and deciding what additional information is worth gathering.',
+        tips: ['Use explicit probability ranges: "I\'m 70% confident this will work" forces honest self-assessment.', 'Identify your key assumptions and rank them by how much your decision depends on them.', 'Ask: what information would change my decision? If nothing would change it, you don\'t need more data.', 'Run small experiments to resolve uncertainty before committing to large changes.']
+      },
+      {
+        title: 'AVOID COMMON DECISION TRAPS',
+        body: 'Human brains are not built for good decision-making. We anchor on the first option we hear, prefer the familiar, overweight recent events, and avoid admitting past mistakes. Being aware of these biases doesn\'t eliminate them — but it helps you build processes that compensate.',
+        tips: ['Generate at least 3 options before evaluating any of them — it fights anchoring.', 'Ask someone who disagrees with your current thinking to steelman their position.', 'Separate "this worked before" from "this is the best option now" — context changes.', 'Practise the "newspaper test": would this decision be reported as obviously wrong in a year?']
+      },
+      {
+        title: 'COMMIT AND REVIEW',
+        body: 'Good decision quality includes what happens after the decision. Commit fully once you\'ve decided — half-committed decisions are worse than either option. Then build in a structured review: what happened, what did you learn, and how does that update your decision-making process?',
+        tips: ['Set a review date for major decisions at the time you make them.', 'Keep a decision log — a simple doc of significant choices and their outcomes.', 'Review bad decisions analytically, not emotionally: what information would have led to a better choice?', 'Celebrate good processes, not just good outcomes — luck can make a bad decision look good temporarily.']
+      }
+    ],
+    resources: [
+      { type: 'Book', name: 'Thinking, Fast and Slow — Daniel Kahneman' },
+      { type: 'Book', name: 'Superforecasting — Philip Tetlock' },
+      { type: 'Template', name: 'ADR format — github.com/joelparkerhenderson/adr' },
+      { type: 'Practice', name: 'Keep a personal decision log' },
+      { type: 'Book', name: 'The Decision Book — Krogerus & Tschäppeler' },
+      { type: 'Reading', name: 'Farnam Street — fs.blog/mental-models' }
+    ]
+  }
+};
+
+/* ===== MODAL ENGINE ===== */
+let currentSkill = null, currentStep = 0;
+
+const overlay = document.getElementById('modalOverlay');
+const modalBox = document.getElementById('modalBox');
+const modalClose = document.getElementById('modalClose');
+const modalIco = document.getElementById('modalIco');
+const modalLabel = document.getElementById('modalLabel');
+const modalTitle = document.getElementById('modalTitle');
+const modalWhy = document.getElementById('modalWhy');
+const stepArea = document.getElementById('stepArea');
+const stepCount = document.getElementById('stepCount');
+const stepPrev = document.getElementById('stepPrev');
+const stepNext = document.getElementById('stepNext');
+const modalResources = document.getElementById('modalResources');
+
+function renderStep() {
+  const skill = SKILLS[currentSkill];
+  const step = skill.steps[currentStep];
+  const total = skill.steps.length;
+
+  stepCount.textContent = `Step ${currentStep + 1} of ${total}`;
+  stepPrev.disabled = currentStep === 0;
+  stepNext.disabled = currentStep === total - 1;
+
+  const pips = skill.steps.map((_,i) =>
+    `<div class="step-pip ${i <= currentStep ? 'done' : ''}"></div>`
+  ).join('');
+
+  stepArea.innerHTML = `
+    <div class="step-num">0${currentStep + 1}</div>
+    <div class="step-title">${step.title}</div>
+    <div class="step-body">${step.body}</div>
+    <div class="step-tips">
+      ${step.tips.map((t,i) => `<div class="step-tip"><div class="tip-bullet">${i+1}</div><div>${t}</div></div>`).join('')}
+    </div>
+    <div class="step-progress">${pips}</div>
+  `;
+  stepArea.style.animation = 'none';
+  requestAnimationFrame(() => { stepArea.style.animation = 'stepFade 0.2s ease'; });
+}
+
+function openModal(skillKey) {
+  const skill = SKILLS[skillKey];
+  if (!skill) return;
+  currentSkill = skillKey;
+  currentStep = 0;
+
+  modalIco.textContent = skill.ico;
+  modalLabel.textContent = skill.label;
+  modalTitle.textContent = skill.title;
+  modalWhy.innerHTML = skill.why;
+
+  modalResources.innerHTML = `
+    <div class="res-title">// Recommended resources</div>
+    <div class="res-grid">
+      ${skill.resources.map(r => `<div class="res-card"><div class="res-type">${r.type}</div><div class="res-name">${r.name}</div></div>`).join('')}
+    </div>
+  `;
+
+  renderStep();
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  modalBox.scrollTop = 0;
+  modalClose.focus();
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.soft-cell').forEach(cell => {
+  cell.addEventListener('click', () => openModal(cell.dataset.skill));
+  cell.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(cell.dataset.skill); } });
+});
+
+modalClose.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+stepPrev.addEventListener('click', () => {
+  if(currentStep > 0) { currentStep--; renderStep(); modalBox.scrollTop = 0; }
+});
+stepNext.addEventListener('click', () => {
+  const total = SKILLS[currentSkill].steps.length;
+  if(currentStep < total - 1) { currentStep++; renderStep(); modalBox.scrollTop = 0; }
+});
+</script>
+</body>
+</html>
